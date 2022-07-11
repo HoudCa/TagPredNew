@@ -1,0 +1,64 @@
+# -*- coding: utf-8 -*-
+"""
+Tag prediction
+
+@author: Houda
+"""
+
+from flask import Flask, request, render_template
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import sklearn 
+# import joblib
+from joblib import load
+
+
+app = Flask(__name__)
+
+
+def text_cleaner(x, lang="english"):
+    x = x.lower()
+    x = re.sub("\'\w+", '', x)
+    # Remove ponctuation but not # (for C# for example)
+    x = re.sub('[^\\w\\s#]', '', x)
+    # Remove links
+    x = re.sub(r'http*\S+', '', x)
+    # Remove numbers
+    x = re.sub(r'\w*\d+\w*', '', x)
+    # Remove extra spaces
+    x = re.sub('\s+', ' ', x)
+    x = x.split(' ')
+    # List of stop words in select language from NLTK
+    stop_words = list(set(stopwords.words(lang)))
+    # Remove stop words
+    x = [word for word in x if word not in stop_words and len(word)>2]
+    
+    return x
+
+
+vectorizer = load("./New_tfidf_vectorizer_1.joblib")
+model = load("./New_model_1.joblib")
+multilabel_binarizer = load("./New_multilabel_binarizer_1.joblib")
+
+@app.route('/')
+def loadPage():
+     return render_template('index.html')
+
+@app.route('/tag_pred', methods=['GET', 'POST'])
+def form_example():
+    # handle the POST request
+    if request.method == 'POST':
+        Question = request.form.get('Question')
+        Question_clean = text_cleaner(Question, "english")
+        X_tfidf = vectorizer.transform([Question_clean])
+        predict = model.predict(X_tfidf)
+        tags_prediction = multilabel_binarizer.inverse_transform(predict)
+        return render_template('index.html', tags_prediction=tags_prediction)
+
+    # otherwise handle the GET request
+    return render_template('index.html')
+          
+if __name__ == "__main__":
+        app.run()
