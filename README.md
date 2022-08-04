@@ -17,8 +17,10 @@ Leur mission est d'aider les développeurs à écrire le script du futur. Cela s
  • Aucune contrainte de latence stricte. Le modèle doit pouvoir générer les balises pertinentes dans une quantité de temps raisonnable.
 
 # Données 🗄️
+
  • train.csv= 48 Mo
  • test.csv= 16 Mo
+
 Les données se composent de 6 colonnes:
 
 1- Id : Représente l'ID de la question
@@ -42,6 +44,13 @@ La clé à retenir de l'intrigue ci-dessus est que la plupart des questions cont
 # Répartition des balises 📉
 Il s'agit de la distribution du nombre de fois que le tag est apparu dans les questions
 
+La clé à retenir de l'intrigue ci-dessus est qu'une balise apparaît 5 fois en max.
+
+# Mot nuage ☁️
+
+C'est le nuage de mots généré à partir des balises et il compte
+
+Les balises les plus fréquentes semblent être plus grandes dans le wordcloud et vice versa.
 
 
 
