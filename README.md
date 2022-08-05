@@ -1,26 +1,10 @@
-# Prédiction de balise de débordement de pile 🏷️
-Un modèle d'apprentissage automatique qui prédit les balises pour une question et un corps donnés
-
-
-# Pour les développeurs, par les développeurs 👨‍💻
-Stack Overflow est une communauté ouverte à tous ceux qui codent. Ils vous permettent d'obtenir des réponses à vos questions de codage les plus difficiles, à partager vos connaissances avec vos collègues en privé et à trouver votre prochain emploi de rêve.
-
-# Pour les entreprises, par les développeurs 🕴️
-Leur mission est d'aider les développeurs à écrire le script du futur. Cela signifie vous aider à trouver et à embaucher des développeurs qualifiés pour votre entreprise et leur fournir les outils dont ils ont besoin pour partager leurs connaissances et travailler efficacement.
-
-# Définition du problème 🤔
-Étant donné un titre et le corps d'une question, nous devons prédire les balises pertinentes de sorte que la question soit recommandée au bon domaine expertafin que l'expert puisse répondre correctement à la question.
-
-# Contraintes commerciales ✔️
- • Pour prédire autant de balises que possible avec des precisionet très élevés recall.
- • Incorrect tagspourrait avoir un impact customer experiencesur Stack Overflow.
- • Aucune contrainte de latence stricte. Le modèle doit pouvoir générer les balises pertinentes dans une quantité de temps raisonnable.
-
-# Données 🗄️
-
- • train.csv= 48 Mo
- • test.csv= 16 Mo
-
+# Qu'est que Stack Overflow ?
+Stack Overflow est la communauté en ligne la plus grande et la plus fiable permettant aux développeurs d'apprendre, de partager leurs connaissances en programmation.
+Le site Web sert de plate-forme aux utilisateurs pour poser et répondre à des questions d'une manière similaire à un wiki ou à Digg. 
+# Définition du problème 
+Étant donné un titre et le corps d'une question, nous devons prédire les balises pertinentes de sorte que la question soit recommandée au bon domaine afin que l'expert puisse répondre correctement à la question.
+Pour cela, nous devrions obtenir une précision et des taux de rappel élevés. C'est-à-dire que nous devons être vraiment sûrs que la balise prédite appartient à la question donnée. De plus, nous voulons avoir un taux de rappel élevé, ce qui signifie que si la balise est réellement censée être présente, nous voulons qu'elle soit présente le plus souvent.
+# Données
 Les données se composent de 6 colonnes:
 
 1- Id : Représente l'ID de la question
@@ -32,25 +16,26 @@ Les données se composent de 6 colonnes:
 
 Nos principales caractéristiques importantes dans l'ensemble de données sont Title, Bodyet Tags.
 
-# Des parcelles pour mieux comprendre 📊
+# Modélisation en problème de machine learning
+Puisque nous comprenons bien le problème métier, essayons de le poser comme un véritable problème d'apprentissage automatique.
+Noua allons utilisé 2 approches :
+## Approche non supervisée : 
+![image](https://user-images.githubusercontent.com/103181390/183138768-ab8b3ae6-9bcf-4a15-ba35-9e92e0abc71a.png)
+* Le modèle LDA utilise des méthodes de classification probabilistes pour affecter chaque question à un ou plusieurs topics.
+* Feature engineering : Bag-of-words
+ * Matrice de fréquence des termes dans les questions : chaque mot de la question est associé à un identifiant et la fréquence d’apparition de chacun des termes est calculé dans une matrice.
+* Détermination des “Topics” qui seront dans notre cas un ensemble de tags, puis affecter un topic aux question.
 
-# Countplot de balises par question 📈
+## Approche supervisée : Problème de classification multilabels
+* Feature extraction avec TF-IDF :
+  * Regression logistique avec OneVsRest Classifier
+  * Une descente de gradient stochastique (SGDC) avec OneVsRest Classifier
+* Feature extraction Word2VEC, USE et BERT :
+  * Regression logistique avec OneVsRest Classifier
+  * Une descente de gradient stochastique (SGDC) avec OneVsRest Classifier
 
-Il s'agit du décompte du nombre de balises par question
 
 
-La clé à retenir de l'intrigue ci-dessus est que la plupart des questions contiennent 2des 3balises.
-
-# Répartition des balises 📉
-Il s'agit de la distribution du nombre de fois que le tag est apparu dans les questions
-
-La clé à retenir de l'intrigue ci-dessus est qu'une balise apparaît 5 fois en max.
-
-# Mot nuage ☁️
-
-C'est le nuage de mots généré à partir des balises et il compte
-
-Les balises les plus fréquentes semblent être plus grandes dans le wordcloud et vice versa.
 
 
 
