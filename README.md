@@ -19,8 +19,8 @@ Nos principales caractéristiques importantes dans l'ensemble de données sont T
 # Modélisation en problème de machine learning
 Puisque nous comprenons bien le problème métier, essayons de le poser comme un véritable problème d'apprentissage automatique.
 Noua allons utilisé 2 approches :
-## Approche non supervisée : 
-![image](https://user-images.githubusercontent.com/103181390/183138768-ab8b3ae6-9bcf-4a15-ba35-9e92e0abc71a.png)
+## Approche non supervisée : ** un modèle LDA à l'aide d'un corpus Gensim ** 
+
 * Le modèle LDA utilise des méthodes de classification probabilistes pour affecter chaque question à un ou plusieurs topics.
 * Feature engineering : Bag-of-words
  * Matrice de fréquence des termes dans les questions : chaque mot de la question est associé à un identifiant et la fréquence d’apparition de chacun des termes est calculé dans une matrice.
@@ -33,6 +33,9 @@ Noua allons utilisé 2 approches :
 * Feature extraction Word2VEC, USE et BERT :
   * Regression logistique avec OneVsRest Classifier
   * Une descente de gradient stochastique (SGDC) avec OneVsRest Classifier
+ ## Déploiement de l'application
+Notre application est écrite avec Python à l'aide du framework Flask, puis déployée sur Heroku
+
 
 
 
