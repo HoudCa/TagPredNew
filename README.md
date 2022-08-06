@@ -36,6 +36,7 @@ Noua allons utilisé 2 approches :
  ## Déploiement de l'application
 Notre application est écrite avec Python à l'aide du framework Flask, puis déployée sur Heroku
 
+![Tag prediction](https://github.com/HoudCa/TagPredNew/blob/main/api_tag_pred.JPG)
 
 
 
